@@ -10,6 +10,12 @@ public class Wordle extends Application {
         Game game = new Game();
         game.newGame();
 
+        Player player = new Player(game);
+
+
+
+
+
 
         Scene scene = new Scene(new Pane(), 800, 600);
         primaryStage.setTitle("Wordle");
