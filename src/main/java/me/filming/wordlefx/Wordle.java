@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Wordle extends Application {
     public void start(Stage primaryStage){
         Game game = new Game();
-
+        game.newGame();
 
 
         Scene scene = new Scene(new Pane(), 800, 600);

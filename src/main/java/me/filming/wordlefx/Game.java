@@ -45,7 +45,7 @@ public class Game {
         return gameWord;
     }
 
-    public void checkGuess(String guess){
+    public String checkGuess(String guess){
         String response = "";
 
         if (guess.equals(gameWord)){
@@ -54,11 +54,47 @@ public class Game {
         }
 
         HashMap<Character, Integer> gameWordCharOccurrences = new HashMap<Character, Integer>();
+        for (int i=0; i < gameWord.length(); i++){
+            char currentChar = gameWord.charAt(i);
 
+            if (gameWordCharOccurrences.containsKey(currentChar)){
+                gameWordCharOccurrences.put(currentChar, gameWordCharOccurrences.get(currentChar) + 1);
 
+            } else {
+                gameWordCharOccurrences.put(currentChar, 1);
+            }
+        }
 
+        for (int i=0; i < guess.length(); i++){
+            char currentGuessChar = guess.charAt(i);
 
+            if (!gameWordCharOccurrences.containsKey(currentGuessChar)){
+                response += currentGuessChar + "R,";
 
+            } else {
+                char currentGameWordChar = gameWord.charAt(i);
+
+                if ((currentGuessChar == currentGameWordChar) && (gameWordCharOccurrences.get(currentGuessChar) > 0)){
+                    response += currentGuessChar + "G,";
+                    gameWordCharOccurrences.put(currentGuessChar, gameWordCharOccurrences.get(currentGuessChar) - 1);
+
+                } else if (gameWordCharOccurrences.get(currentGuessChar) > 0) {
+                    response += currentGuessChar + "Y,";
+                    gameWordCharOccurrences.put(currentGuessChar, gameWordCharOccurrences.get(currentGuessChar) - 1);
+
+                } else {
+                    response += currentGuessChar + "R,";
+                }
+            }
+        }
+
+        String formattedResponse = "";
+        for (int i=0; i < response.length() - 1; i++){
+            char currentChar = response.charAt(i);
+            formattedResponse += currentChar;
+        }
+
+        return formattedResponse;
     }
 
     public void newGame(){
@@ -66,5 +102,6 @@ public class Game {
         int upperbound = wordlist.size();
 
         gameWord = wordlist.get(rand.nextInt(upperbound));
+        System.out.println(gameWord);
     }
 }
