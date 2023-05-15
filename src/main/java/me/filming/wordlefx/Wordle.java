@@ -1,7 +1,23 @@
 package me.filming.wordlefx;
 
-public class WordleApp {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-    Game game = new Game();
-    
+public class Wordle extends Application {
+    public void start(Stage primaryStage){
+        Game game = new Game();
+
+
+
+        Scene scene = new Scene(new Pane(), 800, 600);
+        primaryStage.setTitle("Wordle");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
