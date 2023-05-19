@@ -7,10 +7,17 @@ import javafx.stage.Stage;
 
 public class Wordle extends Application {
     public void start(Stage primaryStage){
+        Pane gamePane = new Pane();
+
         Game game = new Game();
         game.newGame();
 
         Player player = new Player(game);
+
+        View view = new View();
+        gamePane.getChildren().add(view);
+
+
 
 
 
@@ -19,7 +26,7 @@ public class Wordle extends Application {
 
         Scene scene = new Scene(new Pane(), 800, 600);
         primaryStage.setTitle("Wordle");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(gamePane));
         primaryStage.show();
     }
 
