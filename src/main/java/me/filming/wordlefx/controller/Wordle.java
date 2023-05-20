@@ -1,9 +1,12 @@
-package me.filming.wordlefx;
+package me.filming.wordlefx.controller;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import me.filming.wordlefx.model.Game;
+import me.filming.wordlefx.model.Player;
+import me.filming.wordlefx.view.View;
 
 public class Wordle extends Application {
     public void start(Stage primaryStage){

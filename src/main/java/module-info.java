@@ -3,6 +3,10 @@ module me.filming.wordlefx {
     requires javafx.fxml;
 
 
-    opens me.filming.wordlefx to javafx.fxml;
-    exports me.filming.wordlefx;
+    exports me.filming.wordlefx.model;
+    opens me.filming.wordlefx.model to javafx.fxml;
+    exports me.filming.wordlefx.view;
+    opens me.filming.wordlefx.view to javafx.fxml;
+    exports me.filming.wordlefx.controller;
+    opens me.filming.wordlefx.controller to javafx.fxml;
 }

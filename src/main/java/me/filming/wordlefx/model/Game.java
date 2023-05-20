@@ -1,4 +1,4 @@
-package me.filming.wordlefx;
+package me.filming.wordlefx.model;
 
 import java.util.ArrayList;
 import java.io.File;
