@@ -54,11 +54,6 @@ public class TextFieldRowController {
         });
 
         field2.textProperty().addListener((observable, oldValue, newValue) -> {
-            // allowing user to backspace into previous text fields
-            if (newValue.isEmpty() && oldValue.length() == 1) {
-                field1.requestFocus();
-            }
-
             // making sure user only inputs 1 character
             if (newValue.length() > 1) {
                 field2.setText(newValue.substring(0, 1));
@@ -88,11 +83,6 @@ public class TextFieldRowController {
         });
 
         field3.textProperty().addListener((observable, oldValue, newValue) -> {
-            // allowing user to backspace into previous text fields
-            if (newValue.isEmpty() && oldValue.length() == 1) {
-                field2.requestFocus();
-            }
-
             // making sure user only inputs 1 character
             if (newValue.length() == 1 && !isInternalChange.get()) {
                 field3.setText(field3.getText().toUpperCase());
@@ -118,11 +108,6 @@ public class TextFieldRowController {
         });
 
         field4.textProperty().addListener((observable, oldValue, newValue) -> {
-            // allowing user to backspace into previous text fields
-            if (newValue.isEmpty() && oldValue.length() == 1) {
-                field3.requestFocus();
-            }
-
             // making sure user only inputs 1 character
             if (newValue.length() > 1) {
                 field4.setText(newValue.substring(0, 1));
