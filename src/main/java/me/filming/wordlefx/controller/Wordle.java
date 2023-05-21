@@ -17,7 +17,7 @@ public class Wordle extends Application {
 
         Player player = new Player(game);
 
-        View view = new View();
+        View view = new View(game, player);
         gamePane.getChildren().add(view);
 
 

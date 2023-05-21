@@ -8,12 +8,12 @@ import javafx.scene.text.FontWeight;
 import me.filming.wordlefx.controller.TextFieldRowController;
 
 public class TextFieldRow extends Pane {
-    TextField field1;
-    TextField field2;
-    TextField field3;
-    TextField field4;
-    TextField field5;
-    TextFieldRowController controller;
+    private TextField field1;
+    private TextField field2;
+    private TextField field3;
+    private TextField field4;
+    private TextField field5;
+    private TextFieldRowController controller;
 
     public TextFieldRow(int initX, int initY){
         field1 = new TextField();

@@ -6,28 +6,34 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import me.filming.wordlefx.model.Game;
+import me.filming.wordlefx.model.Player;
 import me.filming.wordlefx.view.TextFieldRow;
 
 import java.util.ArrayList;
 
 public class TextFieldRowController {
-    TextField field1;
-    TextField field2;
-    TextField field3;
-    TextField field4;
-    TextField field5;
+    private Game game;
+    private Player player;
 
+    private TextField field1;
+    private TextField field2;
+    private TextField field3;
+    private TextField field4;
+    private TextField field5;
 
-    Boolean field1Backspace;
-    Boolean field2Backspace;
-    Boolean field3Backspace;
-    Boolean field4Backspace;
-    Boolean field5Backspace;
-
+    private Boolean field1Backspace;
+    private Boolean field2Backspace;
+    private Boolean field3Backspace;
+    private Boolean field4Backspace;
+    private Boolean field5Backspace;
 
     private BooleanProperty isInternalChange;
 
-    public TextFieldRowController(TextFieldRow initTextFieldRow) {
+    public TextFieldRowController(Game initGame, Player initPlayer, TextFieldRow initTextFieldRow) {
+        game = initGame;
+        player = initPlayer;
+
         field1 = initTextFieldRow.getField1();
         field2 = initTextFieldRow.getField2();
         field3 = initTextFieldRow.getField3();
@@ -224,6 +230,11 @@ public class TextFieldRowController {
             else if (keyEvent.getCode() == KeyCode.ENTER){
                 if ((field1.getText().length() == 1) && (field2.getText().length() == 1) && (field3.getText().length() == 1) && (field4.getText().length() == 1) && (field5.getText().length() == 1)){
                     System.out.println("This is a valid entry.");
+
+                    String playerGuess = field1.getText() + field2.getText() + field3.getText() + field4.getText() + field5.getText();
+                    playerGuess = playerGuess.toLowerCase();
+
+
                 }
             }
         });
