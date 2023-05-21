@@ -18,6 +18,7 @@ public class TextFieldRow extends Pane {
     public TextFieldRow(int initX, int initY){
         field1 = new TextField();
         field1.setFont(Font.font("Verdana", FontWeight.BOLD, 26));
+        field1.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black;");
         field1.setAlignment(Pos.CENTER);
         field1.setPrefSize(60,60);
         field1.setTranslateX(initX);
@@ -25,6 +26,7 @@ public class TextFieldRow extends Pane {
 
         field2 = new TextField();
         field2.setFont(Font.font("Verdana", FontWeight.BOLD, 26));
+        field2.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black;");
         field2.setAlignment(Pos.CENTER);
         field2.setPrefSize(60,60);
         field2.setTranslateX(initX + 80);
@@ -32,6 +34,7 @@ public class TextFieldRow extends Pane {
 
         field3 = new TextField();
         field3.setFont(Font.font("Verdana", FontWeight.BOLD, 26));
+        field3.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black;");
         field3.setAlignment(Pos.CENTER);
         field3.setPrefSize(60,60);
         field3.setTranslateX(initX + 160);
@@ -39,6 +42,7 @@ public class TextFieldRow extends Pane {
 
         field4 = new TextField();
         field4.setFont(Font.font("Verdana", FontWeight.BOLD, 26));
+        field4.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black;");
         field4.setAlignment(Pos.CENTER);
         field4.setPrefSize(60,60);
         field4.setTranslateX(initX + 240);
@@ -46,6 +50,7 @@ public class TextFieldRow extends Pane {
 
         field5 = new TextField();
         field5.setFont(Font.font("Verdana", FontWeight.BOLD, 26));
+        field5.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black;");
         field5.setAlignment(Pos.CENTER);
         field5.setPrefSize(60,60);
         field5.setTranslateX(initX + 320);
