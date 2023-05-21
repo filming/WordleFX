@@ -65,19 +65,16 @@ public class TextFieldRowController {
             }
         });
 
-        field2.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            // allowing better use of backspace inputs
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().isLetterKey()){
+        // allowing better use of backspace inputs
+        field2.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().isLetterKey()){
+                field2Backspace = false;
+            } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+                if (!field2Backspace){
+                    field2Backspace = true;
+                } else {
                     field2Backspace = false;
-                } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-                    if (!field2Backspace){
-                        field2Backspace = true;
-                    } else {
-                        field2Backspace = false;
-                        field1.requestFocus();
-                    }
+                    field1.requestFocus();
                 }
             }
         });
@@ -90,19 +87,16 @@ public class TextFieldRowController {
             }
         });
 
-        field3.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            // allowing better use of backspace inputs
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().isLetterKey()){
+        // allowing better use of backspace inputs
+        field3.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().isLetterKey()){
+                field3Backspace = false;
+            } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+                if (!field3Backspace){
+                    field3Backspace = true;
+                } else {
                     field3Backspace = false;
-                } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-                    if (!field3Backspace){
-                        field3Backspace = true;
-                    } else {
-                        field3Backspace = false;
-                        field2.requestFocus();
-                    }
+                    field2.requestFocus();
                 }
             }
         });
@@ -119,19 +113,16 @@ public class TextFieldRowController {
             }
         });
 
-        field4.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            // allowing better use of backspace inputs
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().isLetterKey()){
+        // allowing better use of backspace inputs
+        field4.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().isLetterKey()){
+                field4Backspace = false;
+            } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+                if (!field4Backspace){
+                    field4Backspace = true;
+                } else {
                     field4Backspace = false;
-                } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-                    if (!field4Backspace){
-                        field4Backspace = true;
-                    } else {
-                        field4Backspace = false;
-                        field3.requestFocus();
-                    }
+                    field3.requestFocus();
                 }
             }
         });
@@ -151,19 +142,16 @@ public class TextFieldRowController {
             }
         });
 
-        field5.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            // allowing better use of backspace inputs
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().isLetterKey()){
+        // allowing better use of backspace inputs
+        field5.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().isLetterKey()){
+                field5Backspace = false;
+            } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+                if (!field5Backspace){
+                    field5Backspace = true;
+                } else {
                     field5Backspace = false;
-                } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-                    if (!field5Backspace){
-                        field5Backspace = true;
-                    } else {
-                        field5Backspace = false;
-                        field4.requestFocus();
-                    }
+                    field4.requestFocus();
                 }
             }
         });
