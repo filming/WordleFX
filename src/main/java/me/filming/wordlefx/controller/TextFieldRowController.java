@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import me.filming.wordlefx.model.Game;
 import me.filming.wordlefx.model.Player;
 import me.filming.wordlefx.view.TextFieldRow;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class TextFieldRowController {
     private Game game;
     private Player player;
+
+    private TextFieldRow nextRow;
 
     private TextField field1;
     private TextField field2;
@@ -30,15 +33,24 @@ public class TextFieldRowController {
 
     private BooleanProperty isInternalChange;
 
-    public TextFieldRowController(Game initGame, Player initPlayer, TextFieldRow initTextFieldRow) {
+    public TextFieldRowController(Game initGame, Player initPlayer, TextFieldRow initTextFieldRow, TextFieldRow initNextRow) {
         game = initGame;
         player = initPlayer;
 
+        nextRow = initNextRow;
+
         field1 = initTextFieldRow.getField1();
+        field1.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
         field2 = initTextFieldRow.getField2();
         field3 = initTextFieldRow.getField3();
         field4 = initTextFieldRow.getField4();
         field5 = initTextFieldRow.getField5();
+
+        field1.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
+        field2.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
+        field3.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
+        field4.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
+        field5.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
 
         field1Backspace = false;
         field2Backspace = false;
@@ -229,12 +241,50 @@ public class TextFieldRowController {
             }
             else if (keyEvent.getCode() == KeyCode.ENTER){
                 if ((field1.getText().length() == 1) && (field2.getText().length() == 1) && (field3.getText().length() == 1) && (field4.getText().length() == 1) && (field5.getText().length() == 1)){
-                    System.out.println("This is a valid entry.");
 
+                    // change colour of the current row's fields
                     String playerGuess = field1.getText() + field2.getText() + field3.getText() + field4.getText() + field5.getText();
                     playerGuess = playerGuess.toLowerCase();
 
+                    String response = player.makeGuess(playerGuess);
+                    String[] responseParts = response.split(",");
 
+                    TextField currentField = null;
+                    for (String part : responseParts) {
+                        if (currentField == null){
+                            System.out.println("Field 1");
+                            currentField = field1;
+                        } else if (currentField == field1){
+                            System.out.println("Field 2");
+                            currentField = field2;
+                        } else if (currentField == field2){
+                            System.out.println("Field 3");
+                            currentField = field3;
+                        } else if (currentField == field3){
+                            System.out.println("Field 4");
+                            currentField = field4;
+                        } else if (currentField == field4){
+                            System.out.println("Field 5");
+                            currentField = field5;
+                        }
+
+                        if (part.charAt(1) == 'G'){
+                            currentField.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black; -fx-control-inner-background: green; -fx-text-fill: white;");
+                        } else if (part.charAt(1) == 'Y'){
+                            currentField.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black; -fx-control-inner-background: orange; -fx-text-fill: white;");
+                        } else if (part.charAt(1) == 'R'){
+                            currentField.setStyle("-fx-highlight-fill: white; -fx-highlight-text-fill: black; -fx-control-inner-background: #8d0606; -fx-text-fill: white;");
+                        }
+
+
+                    }
+
+                    // change row
+                    if (nextRow != null){
+                        nextRow.getField1().requestFocus();
+                    } else {
+                        System.out.println("We are at the final row!");
+                    }
                 }
             }
         });

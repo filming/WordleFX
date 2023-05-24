@@ -62,6 +62,7 @@ public class TextFieldRow extends Pane {
     public void setController(TextFieldRowController controller) {
         this.controller = controller;
     }
+    public TextFieldRowController getController(){ return controller; }
     public TextField getField1() {
         return field1;
     }

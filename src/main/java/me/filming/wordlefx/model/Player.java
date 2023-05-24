@@ -23,9 +23,11 @@ public class Player {
         return playerGuesses;
     }
 
-    public void makeGuess(String guess){
+    public String makeGuess(String guess){
         String response = game.checkGuess(guess);
         playerGuesses.add(response);
         remainingGuesses -= 1;
+
+        return response;
     }
 }

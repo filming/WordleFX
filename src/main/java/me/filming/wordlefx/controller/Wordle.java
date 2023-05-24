@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import me.filming.wordlefx.model.Game;
 import me.filming.wordlefx.model.Player;
+import me.filming.wordlefx.view.TextFieldRow;
 import me.filming.wordlefx.view.View;
 
 public class Wordle extends Application {
@@ -20,14 +21,6 @@ public class Wordle extends Application {
         View view = new View(game, player);
         gamePane.getChildren().add(view);
 
-
-
-
-
-
-
-
-        Scene scene = new Scene(new Pane(), 800, 600);
         primaryStage.setTitle("Wordle");
         primaryStage.setScene(new Scene(gamePane));
         primaryStage.show();
