@@ -1,8 +1,10 @@
 package me.filming.wordlefx.view;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -61,5 +63,26 @@ public class View extends Pane {
         row1.setController(row1Controller);
 
         getChildren().addAll(row1, row2, row3, row4, row5, row6);
+
+        // create divider between view panels
+        Rectangle divider = new Rectangle(460, 60, 20, 460);
+        divider.setFill(Color.rgb(115,117,140));
+
+        getChildren().add(divider);
+
+        // create result panel
+        Rectangle displayPanel = new Rectangle(500, 60, 240, 460);
+        displayPanel.setFill(Color.rgb(241,146,49));
+
+        Label gameMessage = new Label("     YOU WIN!");
+        gameMessage.setFont(Font.font("Arial", FontWeight.BOLD, 26));
+        gameMessage.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        gameMessage.setTranslateX(520);
+        gameMessage.setTranslateY(80);
+
+        getChildren().addAll(displayPanel, gameMessage);
+
+
+
     }
 }
