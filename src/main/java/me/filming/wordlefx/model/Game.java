@@ -8,10 +8,11 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Game {
-    ArrayList<String> wordlist;
-    String gameWord;
-    boolean wordGuessed;
-    boolean gameStatus;
+    private ArrayList<String> wordlist;
+    private String gameWord;
+    private boolean wordGuessed;
+    private boolean gameStatus;
+
 
     public Game(){
         wordlist = new ArrayList<String>();

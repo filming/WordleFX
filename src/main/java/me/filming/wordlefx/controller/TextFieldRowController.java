@@ -9,16 +9,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import me.filming.wordlefx.model.Game;
 import me.filming.wordlefx.model.Player;
 import me.filming.wordlefx.view.TextFieldRow;
+import me.filming.wordlefx.view.View;
 
 import java.util.ArrayList;
 
 public class TextFieldRowController {
     private Game game;
     private Player player;
+    private View view;
 
     private Boolean wordSubmitted;
     private TextFieldRow nextRow;
@@ -37,9 +40,10 @@ public class TextFieldRowController {
 
     private BooleanProperty isInternalChange;
 
-    public TextFieldRowController(Game initGame, Player initPlayer, TextFieldRow initTextFieldRow, TextFieldRow initNextRow) {
+    public TextFieldRowController(Game initGame, Player initPlayer, TextFieldRow initTextFieldRow, TextFieldRow initNextRow, View initView) {
         game = initGame;
         player = initPlayer;
+        view = initView;
 
         wordSubmitted = false;
         nextRow = initNextRow;
@@ -88,12 +92,16 @@ public class TextFieldRowController {
         });
 
         field1.setOnKeyPressed(keyEvent -> {
+            if (wordSubmitted) {
+                keyEvent.consume(); // Ignore the event if the word has been submitted
+            }
+
+            // disable tab usage
+            if (keyEvent.getCode() == KeyCode.TAB){
+                field1.requestFocus();
+            }
 
             if (!wordSubmitted){
-                // disable tab usage
-                if (keyEvent.getCode() == KeyCode.TAB){
-                    field1.requestFocus();
-                }
 
                 // adding the ability to go to previous fields using backspace
                 if (keyEvent.getCode().isLetterKey()){
@@ -129,11 +137,12 @@ public class TextFieldRowController {
 
 
         field2.setOnKeyPressed(keyEvent -> {
+            // disable tab usage
+            if (keyEvent.getCode() == KeyCode.TAB){
+                field2.requestFocus();
+            }
+
             if (!wordSubmitted){
-                // disable tab usage
-                if (keyEvent.getCode() == KeyCode.TAB){
-                    field2.requestFocus();
-                }
 
                 // adding the ability to go to previous fields using backspace
                 if (keyEvent.getCode().isLetterKey()){
@@ -168,11 +177,12 @@ public class TextFieldRowController {
         });
 
         field3.setOnKeyPressed(keyEvent -> {
+            // disable tab usage
+            if (keyEvent.getCode() == KeyCode.TAB){
+                field3.requestFocus();
+            }
+
             if (!wordSubmitted){
-                // disable tab usage
-                if (keyEvent.getCode() == KeyCode.TAB){
-                    field3.requestFocus();
-                }
 
                 // adding the ability to go to previous fields using backspace
                 if (keyEvent.getCode().isLetterKey()){
@@ -189,6 +199,7 @@ public class TextFieldRowController {
         });
 
         field4.textProperty().addListener((observable, oldValue, newValue) -> {
+
             if (!wordSubmitted){
                 // making sure that current field contains 1 character
                 if (newValue.length() > 1) {
@@ -206,11 +217,12 @@ public class TextFieldRowController {
         });
 
         field4.setOnKeyPressed(keyEvent -> {
+            // disable tab usage
+            if (keyEvent.getCode() == KeyCode.TAB){
+                field4.requestFocus();
+            }
+
             if (!wordSubmitted){
-                // disable tab usage
-                if (keyEvent.getCode() == KeyCode.TAB){
-                    field4.requestFocus();
-                }
 
                 // adding the ability to go to previous fields using backspace
                 if (keyEvent.getCode().isLetterKey()){
@@ -250,12 +262,12 @@ public class TextFieldRowController {
         });
 
         field5.setOnKeyPressed(keyEvent -> {
+            // disable tab usage
+            if (keyEvent.getCode() == KeyCode.TAB){
+                field5.requestFocus();
+            }
 
             if (!wordSubmitted){
-                // disable tab usage
-                if (keyEvent.getCode() == KeyCode.TAB){
-                    field5.requestFocus();
-                }
 
                 // adding the ability to go to previous fields using backspace
                 if (keyEvent.getCode().isLetterKey()){
@@ -272,6 +284,7 @@ public class TextFieldRowController {
                 else if (keyEvent.getCode() == KeyCode.ENTER){
                     if ((field1.getText().length() == 1) && (field2.getText().length() == 1) && (field3.getText().length() == 1) && (field4.getText().length() == 1) && (field5.getText().length() == 1)){
                         wordSubmitted = true;
+                        Boolean finalRow = false;
 
                         // Move to the next row
                         if (nextRow != null) {
@@ -279,6 +292,7 @@ public class TextFieldRowController {
                         } else {
                             field5.getParent().requestFocus();
                             System.out.println("We are at the final row!");
+                            finalRow = true;
                         }
 
                         // change colour of the current row's fields
@@ -312,6 +326,37 @@ public class TextFieldRowController {
                             sequentialTransition.getChildren().add(delay);
                         }
                         sequentialTransition.play();
+
+                        // check to see if word was guessed
+                        if (playerGuess.equals(game.getGameWord())){
+                            //field5.getParent().requestFocus();
+
+                            // updating display panel
+                            player.updateCorrectGuesses();
+
+                            view.getGameMessage().setText("     YOU WIN!");
+                            view.getGameMessage().setTextFill(Color.rgb(66, 126, 26));
+
+                            view.getCorrectWordPrompt().setVisible(true);
+                            view.getCorrectWord().setText("             " + game.getGameWord());
+
+                            view.getCorrectAmount().setText("" + player.getCorrectGuessed());
+                            view.getIncorrectAmount().setText("" + player.getIncorrectGuessed());
+                        } else {
+                            if (finalRow){
+                                // ran out of guesses, lose
+                                player.updateIncorrectGuesses();
+
+                                view.getGameMessage().setText("    YOU LOSE!");
+                                view.getGameMessage().setTextFill(Color.rgb(140, 12, 12));
+
+                                view.getCorrectWordPrompt().setVisible(true);
+                                view.getCorrectWord().setText("             " + game.getGameWord());
+
+                                view.getCorrectAmount().setText("" + player.getCorrectGuessed());
+                                view.getIncorrectAmount().setText("" + player.getIncorrectGuessed());
+                            }
+                        }
                     }
                 }
             }

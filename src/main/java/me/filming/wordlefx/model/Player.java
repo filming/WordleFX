@@ -9,10 +9,15 @@ public class Player {
     int remainingGuesses;
     ArrayList<String> playerGuesses;
 
+    private int correctGuessed;
+    private int incorrectGuessed;
+
     public Player(Game initGame){
         game = initGame;
         remainingGuesses = 0;
         playerGuesses = new ArrayList<String>();
+        correctGuessed = 0;
+        incorrectGuessed = 0;
     }
 
     public int getRemainingGuesses(){
@@ -29,5 +34,20 @@ public class Player {
         remainingGuesses -= 1;
 
         return response;
+    }
+
+    public int getCorrectGuessed() {
+        return correctGuessed;
+    }
+
+    public int getIncorrectGuessed() {
+        return incorrectGuessed;
+    }
+
+    public void updateCorrectGuesses(){
+        correctGuessed += 1;
+    }
+    public void updateIncorrectGuesses(){
+        incorrectGuessed += 1;
     }
 }
